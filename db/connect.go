@@ -2,6 +2,7 @@ package db
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -10,10 +11,15 @@ import (
 
 /*MongoConnect init */
 var MongoConnect = InitConnect()
-var clientOptions = options.Client().ApplyURI("mongodb+srv://admin:kQm9i4G4TXxDIWS1@cluster0-kaoso.mongodb.net/test?retryWrites=true&w=majority")
 
 /*InitConnect ...*/
 func InitConnect() *mongo.Client {
+	var username = "admin"
+	var pw = "kQm9i4G4TXxDIWS1"
+	var host1 = "cluster0-kaoso.mongodb.net"
+	var mongoURI = fmt.Sprintf("mongodb+srv://%s:%s@%s", username, pw, host1)
+	var clientOptions = options.Client().ApplyURI(mongoURI)
+
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 
 	if err != nil {
@@ -34,9 +40,9 @@ func InitConnect() *mongo.Client {
 
 /*CheckConnection ...*/
 func CheckConnection() bool {
-	err := MongoCN.Ping(context.TODO(), nil)
+	err := MongoConnect.Ping(context.TODO(), nil)
 	if err != nil {
-		return true
+		return false
 	}
-	return false
+	return true
 }

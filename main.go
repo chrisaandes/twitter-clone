@@ -5,7 +5,6 @@ import (
 
 	"github.com/chrisaandes/twitter-clone/db"
 	"github.com/chrisaandes/twitter-clone/handlers"
-	"github.com/chrisaandes/twitter-clone/handlers/handlers.go"
 )
 
 func main() {

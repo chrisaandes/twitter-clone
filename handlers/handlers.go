@@ -15,9 +15,9 @@ func Router() {
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
-		PORT = 8080
+		PORT = "8080"
 	}
 
-	handler := cors.AllowAll(router)
+	handler := cors.AllowAll().Handler(router)
 	log.Fatal(http.ListenAndServe(":"+PORT, handler))
 }
