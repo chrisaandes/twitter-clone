@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/chrisaandes/twitter-clone/middleware"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 )
@@ -12,6 +13,8 @@ import (
 /*Router ...*/
 func Router() {
 	router := mux.NewRouter()
+
+	router.HandleFunc("/signup", middleware.CheckDb()).Methods("POST")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
